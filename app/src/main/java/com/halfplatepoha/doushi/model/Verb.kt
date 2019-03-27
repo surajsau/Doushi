@@ -3,6 +3,18 @@ package com.halfplatepoha.doushi.model
 import io.realm.RealmList
 import io.realm.RealmObject
 
+const val FIRST_FORM = "firstForm"
+const val SECOND_FORM = "secondForm"
+const val READING = "reading"
+const val ROMAJI = "romaji"
+const val FIRST_VERB = "firstVerb"
+const val FIRST_VERB_READING = "firstVerbReading"
+const val FIRST_VERB_ROMAJI = "firstVerbRomaji"
+const val SECOND_VERB = "secondVerb"
+const val SECOND_VERB_READING = "secondVerbReading"
+const val SECOND_VERB_ROMAJI = "secondVerbRomaji"
+const val MEANINGS = "meanings"
+
 open class Verb: RealmObject() {
 
     var firstForm: String? = null

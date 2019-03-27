@@ -1,24 +1,28 @@
 package com.halfplatepoha.doushi
 
 import android.app.Application
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.halfplatepoha.doushi.main.MainViewModel
+import com.halfplatepoha.doushi.search.SearchViewModel
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
+import org.kodein.di.android.androidCoreModule
+import org.kodein.di.android.x.androidXContextTranslators
 import org.kodein.di.android.x.androidXModule
 import org.kodein.di.direct
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.kodein.di.generic.*
 
 class DoushiApp: Application(), KodeinAware {
 
     override val kodein by Kodein.lazy {
+        import(androidXModule(this@DoushiApp))
         import(realmDbModule)
-        import(mainModule)
         import(dataModule)
+        import(viewModelModule)
 
         bind<ViewModelProvider.Factory>() with singleton { ViewModelFactory(direct) }
 

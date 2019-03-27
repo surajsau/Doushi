@@ -3,6 +3,7 @@ package com.halfplatepoha.doushi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.kodein.di.DKodein
+import org.kodein.di.Kodein
 import org.kodein.di.generic.instanceOrNull
 
 class ViewModelFactory(private val injector: DKodein): ViewModelProvider.Factory {
