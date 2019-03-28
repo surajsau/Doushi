@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.halfplatepoha.doushi.IntentProvider
-import com.halfplatepoha.doushi.ViewModelFactory
+import com.halfplatepoha.doushi.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -19,12 +18,6 @@ abstract class BaseFragment: Fragment(), KodeinAware {
     abstract val layoutId: Int
 
     private val intentProvider: IntentProvider by instance()
-
-    private val parentKodein: Kodein by kodein()
-
-    open val kodeinBuilder: Kodein.MainBuilder.() -> Unit = {
-        extend(parentKodein)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId, container, false)

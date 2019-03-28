@@ -1,14 +1,13 @@
 package com.halfplatepoha.doushi.detail
 
 import androidx.lifecycle.*
-import com.halfplatepoha.doushi.LANGUAGE_JAPANESE
-import com.halfplatepoha.doushi.VerbDataProvider
+import com.halfplatepoha.doushi.*
 import com.halfplatepoha.doushi.base.BaseViewModel
-import com.halfplatepoha.doushi.base.STATE_FINISH
-import com.halfplatepoha.doushi.model.Meaning
 import io.reactivex.disposables.CompositeDisposable
 
-class DetailViewModel(val verbDataProvider: VerbDataProvider): BaseViewModel() {
+class DetailViewModel(val verbDataProvider: VerbDataProvider,
+                      val historyDataProvider: HistoryDataProvider,
+                      val doushiPref: DoushiPref): BaseViewModel() {
 
     val title = MutableLiveData<String>()
 
@@ -22,11 +21,15 @@ class DetailViewModel(val verbDataProvider: VerbDataProvider): BaseViewModel() {
 
     val error = MutableLiveData<String>()
 
-    val meanings = MutableLiveData<List<Meaning>?>()
+    val meanings = MutableLiveData<List<MeaningAdapterModel>?>()
 
     val clickedItem = MutableLiveData<ClickedVerbPart>()
 
     private val disposables: CompositeDisposable
+
+    private val language = doushiPref.getFromPref(PREF_LANGUAGE, LANGUAGE_JAPANESE)
+
+    val transitive = MutableLiveData<String>()
 
     init {
         disposables = CompositeDisposable()
@@ -35,16 +38,46 @@ class DetailViewModel(val verbDataProvider: VerbDataProvider): BaseViewModel() {
     fun setVerb(verb: String) {
         title.value = verb
         loaderVisibility.value = true
-        disposables.add(verbDataProvider.getDetails(verb)
-            .subscribe({
 
+        historyDataProvider.addHistory(verb)
+
+        disposables.add(verbDataProvider.getDetails(verb)
+            .subscribe({ verb ->
                 loaderVisibility.value = false
-                it?.let {
+                verb?.let {
                     subTitle.value = it.reading
                     firstVerb.value = VerbPart(it.firstVerb, it.firstVerbReading, it.firstVerbRomaji)
                     secondVerb.value = VerbPart(it.secondVerb, it.secondVerbReading, it.secondVerbRomaji)
 
-                    meanings.value = it.meanings?.filter { LANGUAGE_JAPANESE.equals(it.language) }
+                    transitive.value = it.transitive?.run {
+                        when (language) {
+                            LANGUAGE_ENGLISH -> this.transitiveEnglish()
+                            else -> this
+                        }
+                    }
+
+                    val usagePatternParts = it.usagePattern?.
+                        replace("(1)", "")?.
+                        replace("(2)", "")?.
+                        trim()?.
+                        split(";")
+
+                    val japaneseMeanings = it.meanings?.filter { LANGUAGE_JAPANESE.equals(it.language) }
+
+                    meanings.value = when(language) {
+                        LANGUAGE_ENGLISH -> {
+                            verb.meanings?.filter { LANGUAGE_ENGLISH.equals(it.language) }?.
+                                    mapIndexed { index, meaning -> meaning.toAdapterModel(japaneseMeanings?.get(index)?.example!!, usagePatternParts!![index].usageToEnglish())}
+                        }
+
+                        LANGUAGE_JAPANESE ->
+                            japaneseMeanings?.mapIndexed { index, meaning -> meaning.toAdapterModel(usagePatternParts!![index].usageToHiragana()) }
+
+                        else -> {
+                            it.meanings?.filter { LANGUAGE_JAPANESE.equals(it.language) }?.
+                                mapIndexed { index, meaning -> meaning.toAdapterModel(usagePatternParts!![index].usageToHiragana()) }
+                        }
+                    }
                 }
             }, {
                 loaderVisibility.value = false

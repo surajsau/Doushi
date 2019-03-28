@@ -14,8 +14,8 @@
               tools:layout="@layout/fragment_history"/>
 
     <fragment android:id="@+id/settingsFragment"
-              android:name="com.halfplatepoha.doushi.history.HistoryFragment"
+              android:name="com.halfplatepoha.doushi.settings.SettingsFragment"
               android:label="settings_fragment"
-              tools:layout="@layout/fragment_history"/>
+              tools:layout="@layout/fragment_settings"/>
 
 </navigation>

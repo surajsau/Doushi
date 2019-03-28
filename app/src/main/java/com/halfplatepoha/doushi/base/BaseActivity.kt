@@ -1,19 +1,12 @@
 package com.halfplatepoha.doushi.base
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.halfplatepoha.doushi.IntentProvider
-import com.halfplatepoha.doushi.ViewModelFactory
-import org.kodein.di.Kodein
+import com.halfplatepoha.doushi.*
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.direct
-import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.on
-import org.kodein.di.generic.singleton
 
 abstract class BaseActivity: AppCompatActivity(), KodeinAware {
 
@@ -22,7 +15,6 @@ abstract class BaseActivity: AppCompatActivity(), KodeinAware {
     private val intentProvider: IntentProvider by instance()
 
     open val actionObserver = Observer<Int> { handleActions(it) }
-
     /**
      * override this function to handle custom actions
      */

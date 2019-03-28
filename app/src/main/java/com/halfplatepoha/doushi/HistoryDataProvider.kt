@@ -1,8 +1,14 @@
 package com.halfplatepoha.doushi
 
+import com.halfplatepoha.doushi.history.HistoryViewModel
+import com.halfplatepoha.doushi.model.COUNT
 import com.halfplatepoha.doushi.model.History
 import com.halfplatepoha.doushi.model.SEARCH_TERM
+import com.halfplatepoha.doushi.model.TIME_STAMP
+import io.reactivex.Flowable
 import io.realm.Realm
+import io.realm.RealmResults
+import io.realm.Sort
 
 class HistoryDataProvider(private val realm: Realm) {
 
@@ -11,7 +17,7 @@ class HistoryDataProvider(private val realm: Realm) {
 
         val result = realm.where(History::class.java).equalTo(SEARCH_TERM, verb).findFirst()
         result?.let {
-            it.count?.plus(1) ?: 1
+            it.count?.plus(1)
             it.timestamp = System.currentTimeMillis()
         }?: let {
             val newObject = realm.createObject(History::class.java)
@@ -25,8 +31,13 @@ class HistoryDataProvider(private val realm: Realm) {
         realm.commitTransaction()
     }
 
-    fun getHistory(): RealmLiveData<History> {
-        return realm.where(History::class.java).findAllAsync().asLiveData()
+    fun getHistory(sortType: Int): Flowable<RealmResults<History>>  {
+        val sortField = if(sortType == HistoryViewModel.FILTER_MOST_RECENT) TIME_STAMP else COUNT
+
+        return realm.where(History::class.java)
+            .sort(sortField, Sort.DESCENDING)
+            .findAllAsync()
+            .asFlowable()
     }
 
 }

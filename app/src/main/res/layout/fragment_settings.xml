@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:text="@string/settings"
+            android:gravity="center"
+            android:textSize="21sp"
+            android:textColor="@color/textColorPrimary"
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_height="60dp"/>
+
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:orientation="vertical"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
+                android:paddingTop="8dp">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLanguageTitle"
+                        android:text="@string/language"
+                        android:layout_width="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/tvLanguagePreference"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="English"
+                        android:minHeight="0dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/textColorAccent"
+                        android:background="@drawable/bg_usage_pattern"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAboutTitle"
+                        android:text="@string/about"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvFeedbackTitle"
+                        android:text="@string/feedback"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

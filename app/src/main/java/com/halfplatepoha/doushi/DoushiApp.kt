@@ -1,6 +1,10 @@
 package com.halfplatepoha.doushi
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.res.Configuration
+import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +19,7 @@ import org.kodein.di.android.x.androidXContextTranslators
 import org.kodein.di.android.x.androidXModule
 import org.kodein.di.direct
 import org.kodein.di.generic.*
+import java.util.*
 
 class DoushiApp: Application(), KodeinAware {
 
@@ -22,12 +27,15 @@ class DoushiApp: Application(), KodeinAware {
         import(androidXModule(this@DoushiApp))
         import(realmDbModule)
         import(dataModule)
-        import(viewModelModule)
 
         bind<ViewModelProvider.Factory>() with singleton { ViewModelFactory(direct) }
 
+        bind<DoushiPref>() with singleton { DoushiPref(this@DoushiApp) }
+
         bind<RealmConfiguration>(tag = "verbs_RealmConfig") with provider { this@DoushiApp.verbsRealmConfiguration() }
         bind<RealmConfiguration>(tag = "def_RealmConfig") with provider { this@DoushiApp.defaultRealmConfiguration() }
+
+        import(viewModelModule)
     }
 
     override fun onCreate() {

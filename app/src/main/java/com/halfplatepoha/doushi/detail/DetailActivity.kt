@@ -23,7 +23,6 @@ class DetailActivity: BaseActivity(), KodeinAware {
 
     companion object {
         const val EXTRA_VERB = "extra_verb"
-        const val STATE_OPEN_SINGLE_VERB_DIALOG = 100
     }
 
     private val viewModel: DetailViewModel by viewModel()
@@ -34,7 +33,8 @@ class DetailActivity: BaseActivity(), KodeinAware {
 
     override val kodein = Kodein.lazy {
         extend(parentKodein)
-        bind<MeaningAdapter>() with provider { MeaningAdapter() }
+        bind<String>(tag = "verb") with provider {this@DetailActivity.intent?.getStringExtra(EXTRA_VERB) ?: ""}
+        bind<MeaningAdapter>() with provider { MeaningAdapter(instance(tag = "verb")) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +50,8 @@ class DetailActivity: BaseActivity(), KodeinAware {
         cardSecondVerb.setOnClickListener { viewModel.secondVerbClicked() }
 
         viewModel.title.observe(this, Observer { tvTitle.text = it })
+
+        viewModel.transitive.observe(this, Observer { tvTransitive.text = it })
 
         viewModel.subTitle.observe(this, Observer { tvSubtitle.text = it })
 
