@@ -28,16 +28,21 @@
 
             <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp">
+                    android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvLanguageTitle"
                         android:text="@string/language"
                         android:layout_width="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:text="*changes the meaning's language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:alpha="0.7"
+                        android:layout_below="@id/tvLanguageTitle"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/tvLanguagePreference"

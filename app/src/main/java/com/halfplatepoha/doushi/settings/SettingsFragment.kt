@@ -8,14 +8,13 @@ import com.halfplatepoha.doushi.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_settings.*
 import org.kodein.di.Kodein
 import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
-import java.util.*
 
 class SettingsFragment: BaseFragment(), LanguageDialogListener {
 
     companion object {
         const val ACTION_OPEN_LANGUAGE_DIALOG = 100
         const val ACTION_OPEN_FEEDBACK_DIALOG = 101
+        const val ACTION_OPEN_ABOUT_DIALOG = 102
     }
 
     private val parentKodein: Kodein by kodein()
@@ -52,6 +51,8 @@ class SettingsFragment: BaseFragment(), LanguageDialogListener {
                     .show(childFragmentManager, "language_dialog")
 
                 ACTION_OPEN_FEEDBACK_DIALOG -> FeedbackDialog().show(childFragmentManager, "feedback_dialog")
+
+                ACTION_OPEN_ABOUT_DIALOG -> AboutDialog().show(childFragmentManager, "about_dialog")
             }
         })
 

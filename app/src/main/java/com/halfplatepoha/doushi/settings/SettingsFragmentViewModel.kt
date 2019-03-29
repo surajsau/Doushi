@@ -28,7 +28,7 @@ class SettingsFragmentViewModel(val pref: DoushiPref): BaseViewModel() {
     }
 
     fun clickAbout() {
-        action.value = SettingsFragment.ACTION_OPEN_FEEDBACK_DIALOG
+        action.value = SettingsFragment.ACTION_OPEN_ABOUT_DIALOG
     }
 
 }
