@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:text="Compound verbs (複合動詞) is an integral part of the Japanese language and hence is an important part in the journey of learning the language. This app is just an interface over the incredible provided by the NINJAL in providing the Verb lexicon."
+            android:text="Compound verbs (複合動詞) is an integral part of the Japanese language and hence is an important part in the journey of learning the language. This app is just an useful interface over verb lexicon provided by the NINJAL."
             android:layout_marginTop="4dp"/>
 
     <androidx.appcompat.widget.AppCompatTextView

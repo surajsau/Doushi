@@ -70,15 +70,15 @@ class DetailViewModel(val verbDataProvider: VerbDataProvider,
                     meanings.value = when(language) {
                         LANGUAGE_ENGLISH -> {
                             verb.meanings?.filter { LANGUAGE_ENGLISH.equals(it.language) }?.
-                                    mapIndexed { index, meaning -> meaning.toAdapterModel(japaneseMeanings?.get(index)?.example!!, usagePatternParts!![index].usageToEnglish())}
+                                    mapIndexed { index, meaning -> meaning.toAdapterModel(japaneseMeanings?.get(index)?.example!!, if(index < usagePatternParts!!.size) usagePatternParts[index].usageToHiragana() else "")}
                         }
 
                         LANGUAGE_JAPANESE ->
-                            japaneseMeanings?.mapIndexed { index, meaning -> meaning.toAdapterModel(usagePatternParts!![index].usageToHiragana()) }
+                            japaneseMeanings?.mapIndexed { index, meaning -> meaning.toAdapterModel(if(index < usagePatternParts!!.size) usagePatternParts[index].usageToHiragana() else "") }
 
                         else -> {
                             it.meanings?.filter { LANGUAGE_JAPANESE.equals(it.language) }?.
-                                mapIndexed { index, meaning -> meaning.toAdapterModel(usagePatternParts!![index].usageToHiragana()) }
+                                mapIndexed { index, meaning -> meaning.toAdapterModel(if(index < usagePatternParts!!.size) usagePatternParts[index].usageToHiragana() else "") }
                         }
                     }
                 }
