@@ -23,4 +23,12 @@ class SettingsFragmentViewModel(val pref: DoushiPref): BaseViewModel() {
         languagePreference.value = pref.getFromPref(PREF_LANGUAGE, LANGUAGE_JAPANESE)
     }
 
+    fun clickFeedback() {
+        action.value = SettingsFragment.ACTION_OPEN_FEEDBACK_DIALOG
+    }
+
+    fun clickAbout() {
+        action.value = SettingsFragment.ACTION_OPEN_FEEDBACK_DIALOG
+    }
+
 }

@@ -18,13 +18,13 @@ class VerbDataProvider(val realm: Realm) {
 
     fun searchByPart(searchString: String, isFirstVerb: Boolean = true): Flowable<RealmResults<Verb>> {
         val field = if(isFirstVerb) {
-            if(searchString.isJapanese()) FIRST_VERB else FIRST_VERB_ROMAJI
+            if(searchString.isJapanese()) FIRST_VERB_READING else FIRST_VERB_ROMAJI
         } else {
-            if(searchString.isJapanese()) SECOND_VERB else SECOND_VERB_ROMAJI
+            if(searchString.isJapanese()) SECOND_VERB_READING else SECOND_VERB_ROMAJI
         }
 
         return realm.where(Verb::class.java)
-            .equalTo(field, searchString)
+            .contains(field, searchString)
             .findAllAsync()
             .asFlowable()
     }

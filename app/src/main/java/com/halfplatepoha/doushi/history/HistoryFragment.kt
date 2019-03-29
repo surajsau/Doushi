@@ -19,6 +19,10 @@ import org.kodein.di.generic.provider
 
 class HistoryFragment: BaseFragment(), HistoryItemClickListener {
 
+    companion object {
+        const val ACTION_OPEN_SORT_DIALOG = 100
+    }
+
     override val layoutId = R.layout.fragment_history
 
     private val viewModel:HistoryViewModel by viewModel()

@@ -44,7 +44,9 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="2dp"
+            android:textStyle="bold"
             android:paddingBottom="2dp"
+            android:background="@drawable/bg_transitive"
             android:layout_marginRight="16dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
@@ -139,8 +141,9 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvMeaningHeader"
-                    android:text="Meanings"
-                    android:textSize="18sp"
+                    android:text="@string/meanings"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
                     android:layout_marginBottom="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,6 +154,21 @@
                     android:layout_below="@id/tvMeaningHeader"
                     android:layout_width="match_parent"
                     tools:listitem="@layout/row_meaning"
+                    android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSendFeedback"
+                    android:layout_below="@id/rlMeanings"
+                    android:text="Feedback/Report Error"
+                    android:layout_width="wrap_content"
+                    android:background="@null"
+                    android:textAllCaps="false"
+                    android:textSize="12sp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingRight="16dp"
+                    android:alpha="0.3"
+                    android:textColor="@color/colorPrimary"
                     android:layout_height="wrap_content"/>
 
         </RelativeLayout>

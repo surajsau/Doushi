@@ -15,6 +15,7 @@ class SettingsFragment: BaseFragment(), LanguageDialogListener {
 
     companion object {
         const val ACTION_OPEN_LANGUAGE_DIALOG = 100
+        const val ACTION_OPEN_FEEDBACK_DIALOG = 101
     }
 
     private val parentKodein: Kodein by kodein()
@@ -32,6 +33,12 @@ class SettingsFragment: BaseFragment(), LanguageDialogListener {
 
         viewModel.onViewCreated()
 
+        tvVersion.text = "動詞 v${BuildConfig.VERSION_NAME}"
+
+        tvFeedbackTitle.setOnClickListener { viewModel.clickFeedback() }
+
+        tvAboutTitle.setOnClickListener { viewModel.clickAbout() }
+
         tvLanguagePreference.setOnClickListener { viewModel.clickPreference() }
     }
 
@@ -40,9 +47,11 @@ class SettingsFragment: BaseFragment(), LanguageDialogListener {
 
         viewModel.action.observe(this, Observer {
             when(it) {
-                ACTION_OPEN_LANGUAGE_DIALOG -> {
-                    LanguageDialog().apply { this.languageDialogListener = this@SettingsFragment }.show(childFragmentManager, "language_dialog")
-                }
+                ACTION_OPEN_LANGUAGE_DIALOG -> LanguageDialog()
+                    .apply { this.languageDialogListener = this@SettingsFragment }
+                    .show(childFragmentManager, "language_dialog")
+
+                ACTION_OPEN_FEEDBACK_DIALOG -> FeedbackDialog().show(childFragmentManager, "feedback_dialog")
             }
         })
 

@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.halfplatepoha.doushi.DetailsFeedbackDialog
 import com.halfplatepoha.doushi.R
 import com.halfplatepoha.doushi.base.BaseActivity
 import com.halfplatepoha.doushi.singleverb.SingleVerbDialog
@@ -23,6 +24,7 @@ class DetailActivity: BaseActivity(), KodeinAware {
 
     companion object {
         const val EXTRA_VERB = "extra_verb"
+        const val ACTION_OPEN_FEEDBACK_DIALOG = 100
     }
 
     private val viewModel: DetailViewModel by viewModel()
@@ -44,9 +46,8 @@ class DetailActivity: BaseActivity(), KodeinAware {
         rlMeanings.adapter = adapter
 
         btnBack.setOnClickListener { viewModel.backClicked() }
-
+        btnSendFeedback.setOnClickListener { viewModel.feedbackClicked() }
         cardFirstVerb.setOnClickListener { viewModel.firstVerbClicked() }
-
         cardSecondVerb.setOnClickListener { viewModel.secondVerbClicked() }
 
         viewModel.title.observe(this, Observer { tvTitle.text = it })
@@ -86,6 +87,13 @@ class DetailActivity: BaseActivity(), KodeinAware {
 
         intent?.let { viewModel.setVerb(it.getStringExtra(EXTRA_VERB)) }
 
+    }
+
+    override fun handleActions(action: Int) {
+        when(action) {
+            ACTION_OPEN_FEEDBACK_DIALOG -> DetailsFeedbackDialog.newInstance(viewModel.verbString).show(supportFragmentManager, "feedback_dialog")
+        }
+        super.handleActions(action)
     }
 
 }

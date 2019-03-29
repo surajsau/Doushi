@@ -31,11 +31,14 @@ class DetailViewModel(val verbDataProvider: VerbDataProvider,
 
     val transitive = MutableLiveData<String>()
 
+    lateinit var verbString: String
+
     init {
         disposables = CompositeDisposable()
     }
 
     fun setVerb(verb: String) {
+        verbString = verb
         title.value = verb
         loaderVisibility.value = true
 
@@ -100,6 +103,10 @@ class DetailViewModel(val verbDataProvider: VerbDataProvider,
 
     fun secondVerbClicked() {
         clickedItem.value = ClickedVerbPart(secondVerb.value?.form!!, false)
+    }
+
+    fun feedbackClicked() {
+        action.value = DetailActivity.ACTION_OPEN_FEEDBACK_DIALOG
     }
 
 }

@@ -25,7 +25,7 @@ class MeaningAdapter(private val verb: String): RecyclerView.Adapter<MeaningView
     override fun onBindViewHolder(holder: MeaningViewHolder, position: Int) {
         meanings?.get(position)?.let {
             holder.tvMeaning.text = it.meaning
-            holder.tvExample.text = it.example
+            holder.tvExample.text = "e.g., ${it.example}"
 
             val usagePattern = StringBuilder("")
             it.usagePattern.forEach { usagePatternPart -> usagePattern.append(usagePatternPart).append(" ").append(verb) }

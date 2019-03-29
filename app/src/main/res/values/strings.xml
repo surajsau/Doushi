@@ -10,5 +10,6 @@
 
     <string name="lang_jp" translatable="false">日本語</string>
     <string name="lang_eng" translatable="false">English</string>
+    <string name="meanings">Meanings</string>
 
 </resources>
