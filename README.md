@@ -4,7 +4,7 @@ Compound verbs (複合動詞) is an integral part of the Japanese language and h
 
 動詞 app is an useful interface over the [verb lexicon]() provided by the NINJAL (The National Institute for Japanese Language and Linguistics). Features like search history have been included to assist recollection & learning of Japanese language.
 
-<img src="screenshots/screenshot1.webp" width="25%" /><img src="screenshots/screenshot2.webp" width="25%" />
+<img src="screenshots/screenshot1.webp" width="25%" />   <img src="screenshots/screenshot2.webp" width="25%" />
 
 ### Developement highlights
 - Completely developed in Kotlin
